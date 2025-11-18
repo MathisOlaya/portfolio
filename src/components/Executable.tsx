@@ -1,3 +1,6 @@
+// Dependencies
+import { useRef, useState } from "react";
+
 // HELPER
 import TextHelper from "../helpers/TextHelper";
 
@@ -8,12 +11,20 @@ interface Props {
 }
 
 function Executable(props: Props) {
+  const [executableVisible, setExecutableVisible] = useState(false);
+
   return (
-    <div className="flex flex-col items-center px-4 py-1 border border-transparent hover:bg-gray-600 hover:border hover:border-white">
+    <div
+      className="flex flex-col items-center px-4 py-1 border border-transparent hover:bg-gray-600 hover:border hover:border-white"
+      onDoubleClick={() => setExecutableVisible(true)}
+    >
       <img className="h-12" draggable="false" src={props.icon} />
       <p className="mt-1 text-xs text-center max-w-[80px] break-words">
         {TextHelper.cutText(props.name, 25)}
       </p>
+      {executableVisible ? (
+        <p className="absolute left-0 top-1/2">Test</p>
+      ) : null}
     </div>
   );
 }
