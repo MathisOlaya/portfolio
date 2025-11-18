@@ -1,7 +1,16 @@
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./views/Home";
 
 function App() {
-  return <div className="bg-red-500">Salut, Tailwind fonctionne !</div>;
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </>
+  );
 }
 
 export default App;
