@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color: white;
+  user-select: none;
+}
+
 /* @import "tailwindcss";
 
 :root {
