@@ -4,7 +4,7 @@ import Desktop from "./views/Desktop";
 function App() {
   return (
     <>
-      <Router>
+      <Router basename="/portfolio">
         <Routes>
           <Route path="/" element={<Desktop />} />
         </Routes>
