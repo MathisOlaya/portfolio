@@ -25,7 +25,12 @@ function Executable(props: Props) {
         </p>
       </div>
       {executableVisible ? (
-        <div className="absolute top-1/4 left-1/4 bg-gray-700 p-2 w-[600px] h-[400px]">
+        <div className="
+              absolute 
+              top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 aspect-[4/3]
+              md:w-2/3 md:max-w-xl
+              bg-gray-700 p-4
+            ">
           <p>Application : {props.name}</p>
           <button onClick={() => setExecutableVisible(false)}>Close me</button>
         </div>
