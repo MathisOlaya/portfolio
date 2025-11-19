@@ -23,36 +23,43 @@ function Window({ icon, name, children, onCloseButtonClick }: Props) {
     "--left": `${left}%`,
   };
 
-  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleDown = (
+    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent
+  ) => {
     const div = document.getElementById("window");
     if (!div) return;
 
-    // distance between top left corner of window and mouse position
+    const { x, y } = getClientXY(event);
     const rect = div.getBoundingClientRect();
-    setOffset({ x: event.clientX - rect.left, y: event.clientY - rect.top });
+    setOffset({ x: x - rect.left, y: y - rect.top });
     setMouseDownState(true);
   };
 
-  const handleMouseMovement = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  const handleMove = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent> | React.TouchEvent
   ) => {
     if (!mouseDown) return;
 
-    // get div
     const div = document.getElementById("window");
+    if (!div) return;
 
-    if (!mouseDown) return;
+    const { x, y } = getClientXY(event);
 
     const leftPercentage =
-      ((event.clientX - offset.x + div!.offsetWidth / 2) / window.innerWidth) *
-      100;
+      ((x - offset.x + div.offsetWidth / 2) / window.innerWidth) * 100;
     const topPercentage =
-      ((event.clientY - offset.y + div!.offsetHeight / 2) /
-        window.innerHeight) *
-      100;
+      ((y - offset.y + div.offsetHeight / 2) / window.innerHeight) * 100;
 
     setLeft(leftPercentage);
     setTop(topPercentage);
+  };
+
+  const getClientXY = (event: React.MouseEvent | React.TouchEvent) => {
+    if ("touches" in event) {
+      return { x: event.touches[0].clientX, y: event.touches[0].clientY };
+    } else {
+      return { x: event.clientX, y: event.clientY };
+    }
   };
 
   return (
@@ -67,8 +74,11 @@ function Window({ icon, name, children, onCloseButtonClick }: Props) {
             "
     >
       <div
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMovement}
+        onTouchStart={handleDown}
+        onTouchMove={handleMove}
+        onTouchEnd={() => setMouseDownState(false)}
+        onMouseDown={handleDown}
+        onMouseMove={handleMove}
         onMouseUp={() => setMouseDownState(false)}
         className="flex bg-black justify-between"
       >
