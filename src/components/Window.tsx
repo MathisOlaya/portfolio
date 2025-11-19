@@ -1,4 +1,4 @@
-import { useState, type BaseSyntheticEvent, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 // Interface PROPS
 interface Props {
