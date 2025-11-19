@@ -1,5 +1,5 @@
 // Dependencies
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 // HELPER
 import TextHelper from "../helpers/TextHelper";
