@@ -1,47 +1,61 @@
 export type File = {
-  type: "file";
+  type: 'file';
+  name: string;
   content: string;
 };
 
 export type Folder = {
-  type: "folder";
-  children: Record<string, File | Folder>;
+  type: 'folder';
+  name: string;
+  children: Array<File | Folder>;
 };
 
 export const Storage: Folder = {
-  type: "folder",
-  children: {
-    "C:": {
-      type: "folder",
-      children: {
-        Users: {
-          type: "folder",
-          children: {
-            mathisolaya: {
-              type: "folder",
-              children: {
-                Documents: {
-                  type: "folder",
-                  children: {
-                    Zwap: {
-                      type: "file",
-                      content: "Zwap est un projet...",
-                    },
-                  },
-                },
-              },
-            },
-            public: {
-              type: "folder",
-              children: {},
-            },
-          },
-        },
-        Program: {
-          type: "folder",
-          children: {},
-        },
-      },
+  name: 'C:',
+  type: 'folder',
+  children: [
+    {
+      name: 'Program',
+      type: 'folder',
+      children: [],
     },
-  },
+    {
+      name: 'Users',
+      type: 'folder',
+      children: [
+        {
+          name: 'mathisolaya',
+          type: 'folder',
+          children: [
+            {
+              name: 'Documents',
+              type: 'folder',
+              children: [
+                {
+                  name: 'Zwap',
+                  type: 'folder',
+                  children: [],
+                },
+                {
+                  name: 'ClipIt',
+                  type: 'folder',
+                  children: [],
+                },
+                {
+                  name: 'Test.txt',
+                  type: 'file',
+                  content: 'Fichier Texte',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: 'Public',
+          type: 'folder',
+          children: [],
+        },
+      ],
+    },
+  ],
 };
