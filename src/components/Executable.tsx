@@ -1,8 +1,5 @@
 // Dependencies
-import { useState, type ReactNode } from 'react';
-
-// Component
-import Window from './Window';
+import { type ReactNode } from 'react';
 
 // HELPER
 import TextHelper from '../helpers/TextHelper';
