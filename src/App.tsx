@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Desktop from "./views/Desktop";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Desktop from './views/Desktop';
 
 function App() {
   return (
