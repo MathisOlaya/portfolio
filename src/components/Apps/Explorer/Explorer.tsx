@@ -65,9 +65,26 @@ function Explorer(props: Props) {
 
   return (
     <div>
-      <button onClick={goToPreviousPath}>Back</button>
-      <p>{path}</p>
-      <p>{currentFolderContent?.children['Zwap']?.type === 'file' ? currentFolderContent.children['Zwap'].content : null}</p>
+      <button className="px-4 py-2" onClick={goToPreviousPath}>
+        Back
+      </button>
+      <p className="border m-4">{path}</p>
+      <div className="flex gap-4 px-4">
+        {currentFolderContent.map((child) => {
+          if (child.type === 'folder')
+            return (
+              <button className="p-4 bg-gray-800" onClick={() => goToPath(child.name)} key={child.name}>
+                Folder: {child.name}
+              </button>
+            );
+          if (child.type === 'file')
+            return (
+              <p className="p-4" key={child.name}>
+                Fichier: {child.name}
+              </p>
+            );
+        })}
+      </div>
     </div>
   );
 }
