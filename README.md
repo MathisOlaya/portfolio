@@ -34,6 +34,10 @@
 - Refactor Storage System
 - Displayed Folder Content in Explorer
 - Added Navigation between Folder
+- Added Window Manager for Multiple Windows handling
+
+<img width="1740" height="847" alt="image" src="https://github.com/user-attachments/assets/419d42a3-89c4-4cf9-9f67-8885ac5071c9" />
+
 
 ![Vidéo sans titre ‐ Réalisée avec Clipchamp (1)](https://github.com/user-attachments/assets/b5b4fd29-4adb-4dd9-aba9-07613cdf21ea)
   
