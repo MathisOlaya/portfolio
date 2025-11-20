@@ -14,7 +14,7 @@ interface Props {
 
 function Explorer(props: Props) {
   const [path, setPath] = useState(props.path);
-  const [currentFolderContent, setCurrentFolderContent] = useState<Folder | null>(null);
+  const [currentFolderContent, setCurrentFolderContent] = useState<Array<Folder | File>>([]);
 
   const goToPreviousPath = () => {
     const allPath = PathHelper.splitPath(path);
@@ -28,8 +28,11 @@ function Explorer(props: Props) {
     getFolderContent(newPath, Storage);
   };
 
-  const getFolderContent = (path: string, root: Folder | File) => {
-    let current: Folder | File = root;
+  const goToPath = (folderName: string) => {
+    const newPath = path + '/' + folderName;
+    setPath(newPath);
+    getFolderContent(newPath, Storage);
+  };
 
   const getFolderContent = (pathDestination: string, root: Folder | File) => {
     let storage = root;
