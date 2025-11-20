@@ -1,5 +1,5 @@
 // Dependencies
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 // Component
 import Window from "./Window";
@@ -11,6 +11,7 @@ import TextHelper from "../helpers/TextHelper";
 interface Props {
   name: string;
   icon: string;
+  children: ReactNode;
 }
 
 function Executable(props: Props) {
@@ -28,9 +29,13 @@ function Executable(props: Props) {
         </p>
       </div>
       {executableVisible ? (
-          <Window icon={props.icon} name={props.name} onCloseButtonClick={() => setExecutableVisible(false)}>
-              <p>Application : {props.name}</p>
-          </Window>
+        <Window
+          icon={props.icon}
+          name={props.name}
+          onCloseButtonClick={() => setExecutableVisible(false)}
+        >
+          {props.children}
+        </Window>
       ) : null}
     </>
   );
