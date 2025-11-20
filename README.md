@@ -29,3 +29,11 @@
 
 🎬 **Demo Video**  
 ![Demo Video](https://github.com/user-attachments/assets/9c6f78bc-932f-424e-82f7-30eb35e841f9)
+
+### 20.11.2025 — Update
+- Refactor Storage System
+- Displayed Folder Content in Explorer
+- Added Navigation between Folder
+
+![Vidéo sans titre ‐ Réalisée avec Clipchamp (1)](https://github.com/user-attachments/assets/b5b4fd29-4adb-4dd9-aba9-07613cdf21ea)
+  
