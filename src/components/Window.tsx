@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, useRef, type ReactNode } from "react";
 
 // Interface PROPS
 interface Props {
@@ -17,6 +17,8 @@ function Window({ icon, name, children, onCloseButtonClick }: Props) {
   const [left, setLeft] = useState(50);
   const [mouseDown, setMouseDownState] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  
+  const windowRef = useRef<HTMLDivElement | null>(null);
 
   const style: CSSVariables = {
     "--top": `${top}%`,
@@ -26,7 +28,7 @@ function Window({ icon, name, children, onCloseButtonClick }: Props) {
   const handleDown = (
     event: React.MouseEvent<HTMLDivElement> | React.TouchEvent
   ) => {
-    const div = document.getElementById("window");
+    const div = windowRef.current;
     if (!div) return;
 
     const { x, y } = getClientXY(event);
@@ -40,7 +42,7 @@ function Window({ icon, name, children, onCloseButtonClick }: Props) {
   ) => {
     if (!mouseDown) return;
 
-    const div = document.getElementById("window");
+    const div = windowRef.current;
     if (!div) return;
 
     const { x, y } = getClientXY(event);
@@ -64,7 +66,7 @@ function Window({ icon, name, children, onCloseButtonClick }: Props) {
 
   return (
     <div
-      id="window"
+      ref={windowRef}
       style={style}
       className="
               absolute flex flex-col
