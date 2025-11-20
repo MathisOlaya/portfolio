@@ -31,19 +31,29 @@ function Explorer(props: Props) {
   const getFolderContent = (path: string, root: Folder | File) => {
     let current: Folder | File = root;
 
+  const getFolderContent = (pathDestination: string, root: Folder | File) => {
+    let storage = root;
+    let content: (Folder | File)[] = [];
     // string to array of part
-    const arrayPath = PathHelper.splitPath(path);
+    const arrayPath = PathHelper.splitPath(pathDestination);
 
-    for (const part of arrayPath) {
-      if (current.type !== 'folder') return null;
-      const next = current.children[part];
-      if (!next) return null;
-      current = next;
-    }
+    for (let i = 0; i < arrayPath.length; i++) {
+      // for root (entry)
+      if (i === 0) {
+        if (storage.type !== 'folder') continue;
+        content = storage.children;
+        continue;
+      }
 
-    if (current.type === 'folder') {
-      setCurrentFolderContent(current);
+      // get children based on name
+      const child = content.find((child) => child.name === arrayPath[i] && child.type === 'folder');
+
+      if (!child || child.type !== 'folder') continue;
+
+      // save children for next iteration
+      content = child.children;
     }
+    setCurrentFolderContent(content);
   };
 
   useEffect(() => {
