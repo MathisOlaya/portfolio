@@ -1,11 +1,15 @@
 // Provider
-import { useAppManager } from "../managers/AppManager";
+import { useAppManager, type AppInstance } from "../managers/AppManager";
 
 // Icons
 import { FaWindows } from "react-icons/fa";
 
 function TaskBar() {
-    const {openApps}   = useAppManager()
+    const {openApps, toggleMinimization}   = useAppManager()
+
+    const toggleAppMinimize = (app: AppInstance) => {
+        toggleMinimization(app.id)
+    }
 
     return(
         <div className="absolute flex bottom-0 w-full bg-gray-500">
@@ -14,7 +18,7 @@ function TaskBar() {
             {
                 openApps.map(app => {
                     return(
-                        <div className="flex align-contents-center gap-2 hover:bg-gray-800 p-3">
+                        <div onClick={() => toggleAppMinimize(app)} className="flex align-contents-center gap-2 hover:bg-gray-800 p-3">
                             <img className="w-4" src={app.icon} alt="" />
                             <p>{app.name}</p>
                         </div>
