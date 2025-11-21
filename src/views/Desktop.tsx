@@ -15,7 +15,7 @@ import { useMemo } from 'react';
 function Desktop() {
   const base = import.meta.env.BASE_URL || '/';
   const FloatingLinesMemo = useMemo(() => <FloatingLines interactive={false} />, []);
-  const { openApps, closeApp } = useAppManager();
+  const { openApps } = useAppManager();
 
   return (
     <>
@@ -32,13 +32,13 @@ function Desktop() {
         </main>
 
         {/* All opened apps */}
-        {openApps.map((app) => {
-          return (
-            <Window key={app.id} name={app.name} icon={app.icon} onCloseButtonClick={() => closeApp(app.id)}>
+        {openApps.map((app) => !app.minimized
+          ? (
+            <Window key={app.id} id={app.id} name={app.name} icon={app.icon} position={app.position}>
               {app.content}
             </Window>
-          );
-        })}
+          ) : null
+        )}
       </div>
     </>
   );
