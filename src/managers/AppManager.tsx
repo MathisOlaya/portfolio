@@ -36,7 +36,18 @@ export const AppManagerProvider = ({ children }: { children: ReactNode }) => {
     setOpenApps((prev) => prev.filter((app) => app.id !== id));
   };
 
-  return <AppManagerContext.Provider value={{ openApps, openApp, closeApp }}>{children}</AppManagerContext.Provider>;
+  const toggleMinimization = (id: string) => {
+    setOpenApps(prev =>
+      prev.map(app =>
+        app.id === id
+          ? { ...app, minimized: !app.minimized } 
+          : app
+      )
+    );
+};
+
+
+  return <AppManagerContext.Provider value={{ openApps, openApp, closeApp, moveApp, toggleMinimization }}>{children}</AppManagerContext.Provider>;
 };
 
 export const useAppManager = () => {
