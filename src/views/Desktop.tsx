@@ -2,9 +2,11 @@
 import FloatingLines from '../components/FloatingLines';
 import Executable from '../components/Executable';
 import Window from '../components/Window';
+import TaskBar from '../components/TaskBar';
 
 // Context
 import { useAppManager } from '../managers/AppManager';
+
 
 // Apps
 import Explorer from '../components/Apps/Explorer/Explorer';
@@ -26,6 +28,7 @@ function Desktop() {
           <Executable icon={base + 'folder.png'} name="Mes projets">
             <Explorer path="C:/Users/mathisolaya/Documents" />
           </Executable>
+          <TaskBar/>
         </main>
 
         {/* All opened apps */}
