@@ -69,12 +69,12 @@ function Explorer(props: Props) {
         Back
       </button>
       <p className="border m-4">{path}</p>
-      <div className="flex gap-4 px-4">
+      <div className="flex px-4 ">
         {currentFolderContent.map((child) => {
           if (child.type === 'folder')
             return (
-              <button className="p-4 bg-gray-800" onClick={() => goToPath(child.name)} key={child.name}>
-                Folder: {child.name}
+              <button className="p-2 flex flex-col gap-1 hover:bg-gray-800 items-center" onClick={() => goToPath(child.name)} key={child.name}>
+                <img className='w-8' src="/folder.png"></img><p className="text-sm">{child.name}</p>
               </button>
             );
           if (child.type === 'file')
