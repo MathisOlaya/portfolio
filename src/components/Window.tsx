@@ -7,7 +7,7 @@ interface Props {
   icon: string;
   name: string;
   children: ReactNode;
-  position: {top: number, left: number}
+  position: { top: number; left: number };
 }
 
 interface CSSVariables extends React.CSSProperties {
@@ -21,7 +21,7 @@ function Window({ id, icon, name, children, position }: Props) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   // manager
-  const {moveApp, toggleMinimization, closeApp} = useAppManager();
+  const { moveApp, toggleMinimization, closeApp } = useAppManager();
 
   const windowRef = useRef<HTMLDivElement | null>(null);
 
@@ -55,7 +55,7 @@ function Window({ id, icon, name, children, position }: Props) {
     setTop(topPercentage);
 
     // update app manager pos
-    moveApp(id, {left: leftPercentage, top: topPercentage}, )
+    moveApp(id, { left: leftPercentage, top: topPercentage });
   };
 
   const getClientXY = (event: React.MouseEvent | React.TouchEvent) => {
@@ -71,11 +71,11 @@ function Window({ id, icon, name, children, position }: Props) {
       ref={windowRef}
       style={style}
       className="
-              absolute flex flex-col
-              top-[var(--top)] left-[var(--left)] w-full -translate-x-1/2 -translate-y-1/2 aspect-[4/3] touch-none
-              md:w-2/3 md:max-w-xl
-              bg-gray-700
-            "
+    absolute flex flex-col
+    top-[var(--top)] left-[var(--left)] w-full -translate-x-1/2 -translate-y-1/2 aspect-[4/3] touch-none
+    md:w-2/3 md:max-w-xl
+    bg-gray-700
+  "
     >
       <div onTouchStart={handleDown} onTouchMove={handleMove} onTouchEnd={() => setMouseDownState(false)} onMouseDown={handleDown} onMouseMove={handleMove} onMouseUp={() => setMouseDownState(false)} className="flex bg-black justify-between">
         <div className="flex gap-2 items-center p-2">
