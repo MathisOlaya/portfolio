@@ -1,22 +1,27 @@
 import { useState, useRef, type ReactNode } from 'react';
+import { useAppManager } from '../managers/AppManager';
 
 // Interface PROPS
 interface Props {
+  id: string;
   icon: string;
   name: string;
   children: ReactNode;
-  onCloseButtonClick: () => void;
+  position: {top: number, left: number}
 }
 
 interface CSSVariables extends React.CSSProperties {
   [key: `--${string}`]: string | number;
 }
 
-function Window({ icon, name, children, onCloseButtonClick }: Props) {
-  const [top, setTop] = useState(50);
-  const [left, setLeft] = useState(50);
+function Window({ id, icon, name, children, position }: Props) {
+  const [top, setTop] = useState(position.top);
+  const [left, setLeft] = useState(position.left);
   const [mouseDown, setMouseDownState] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  // manager
+  const {moveApp, toggleMinimization, closeApp} = useAppManager();
 
   const windowRef = useRef<HTMLDivElement | null>(null);
 
@@ -48,6 +53,9 @@ function Window({ icon, name, children, onCloseButtonClick }: Props) {
 
     setLeft(leftPercentage);
     setTop(topPercentage);
+
+    // update app manager pos
+    moveApp(id, {left: leftPercentage, top: topPercentage}, )
   };
 
   const getClientXY = (event: React.MouseEvent | React.TouchEvent) => {
@@ -75,7 +83,10 @@ function Window({ icon, name, children, onCloseButtonClick }: Props) {
           <p>{name}</p>
         </div>
         <div>
-          <button onClick={onCloseButtonClick} className="hover:bg-red-500 py-2 aspect-[7/3]">
+          <button onClick={() => toggleMinimization(id)} className="hover:bg-gray-800 py-2 aspect-[7/3]">
+            -
+          </button>
+          <button onClick={() => closeApp(id)} className="hover:bg-red-500 py-2 aspect-[7/3]">
             X
           </button>
         </div>
