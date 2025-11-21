@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
 
+// Manager
+import { useAppManager } from '../../../managers/AppManager';
+
 // Helpers
 import PathHelper from '../../../helpers/PathHelper';
 
 // Storage
 import { Storage } from './Storage';
 import type { Folder, File } from './Storage';
+
+// Components
+import Notepad from '../Notepad/Notepad';
 
 // Interface Props
 interface Props {
@@ -15,6 +21,8 @@ interface Props {
 function Explorer(props: Props) {
   const [path, setPath] = useState(props.path);
   const [currentFolderContent, setCurrentFolderContent] = useState<Array<Folder | File>>([]);
+
+  const { openApp } = useAppManager();
 
   const goToPreviousPath = () => {
     const allPath = PathHelper.splitPath(path);
@@ -74,14 +82,16 @@ function Explorer(props: Props) {
           if (child.type === 'folder')
             return (
               <button className="p-2 flex flex-col gap-1 hover:bg-gray-800 items-center" onClick={() => goToPath(child.name)} key={child.name}>
-                <img className='w-8' src="/folder.png"></img><p className="text-sm">{child.name}</p>
+                <img className="w-8" src="/folder.png"></img>
+                <p className="text-sm">{child.name}</p>
               </button>
             );
           if (child.type === 'file')
             return (
-              <p className="p-4" key={child.name}>
-                Fichier: {child.name}
-              </p>
+              <button className="flex flex-col p-2 hover:bg-gray-800 gap-1 items-center" key={child.name} onClick={() => openApp(child.name, '/file.png', <Notepad content={child.content} />)}>
+                <img className="w-12" src="/file.png"></img>
+                <p className="text-sm">{child.name}</p>
+              </button>
             );
         })}
       </div>
