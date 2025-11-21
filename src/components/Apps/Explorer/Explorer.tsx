@@ -13,6 +13,9 @@ import type { Folder, File } from './Storage';
 // Components
 import Notepad from '../Notepad/Notepad';
 
+// Icons
+import { ArrowUp } from 'lucide-react';
+
 // Interface Props
 interface Props {
   path: string;
@@ -73,10 +76,10 @@ function Explorer(props: Props) {
 
   return (
     <div>
-      <button className="px-4 py-2" onClick={goToPreviousPath}>
-        Back
-      </button>
-      <p className="border m-4">{path}</p>
+      <div className="flex items-center px-4 gap-2 p-4">
+        <ArrowUp color="white" className="hover:bg-gray-800" size={18} onClick={goToPreviousPath} />
+        <p className="border w-full ">{path}</p>
+      </div>
       <div className="flex px-4 ">
         {currentFolderContent.map((child) => {
           if (child.type === 'folder')
