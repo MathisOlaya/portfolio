@@ -81,14 +81,14 @@ function Explorer(props: Props) {
         {currentFolderContent.map((child) => {
           if (child.type === 'folder')
             return (
-              <button className="p-2 flex flex-col gap-1 hover:bg-gray-800 items-center" onClick={() => goToPath(child.name)} key={child.name}>
+              <button className="p-2 flex flex-col gap-1 hover:bg-gray-800 items-center w-24" onClick={() => goToPath(child.name)} key={child.name}>
                 <img className="w-8" src="/folder.png"></img>
                 <p className="text-sm">{child.name}</p>
               </button>
             );
           if (child.type === 'file')
             return (
-              <button className="flex flex-col p-2 hover:bg-gray-800 gap-1 items-center" key={child.name} onClick={() => openApp(child.name, '/file.png', <Notepad content={child.content} />)}>
+              <button className="flex flex-col p-2 hover:bg-gray-800 gap-1 items-center w-24" key={child.name} onClick={() => openApp(child.name, '/file.png', <Notepad content={child.content} />)}>
                 <img className="w-12" src="/file.png"></img>
                 <p className="text-sm">{child.name}</p>
               </button>
