@@ -40,4 +40,10 @@
 
 
 ![Vidéo sans titre ‐ Réalisée avec Clipchamp (1)](https://github.com/user-attachments/assets/b5b4fd29-4adb-4dd9-aba9-07613cdf21ea)
+
+### 21.11.2025 — Update
+- TaskBar
+- App minimizing with saved position
+- Correct icon in Explorer
+- Notepad that can render Markdown 
   
