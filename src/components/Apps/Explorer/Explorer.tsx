@@ -8,7 +8,7 @@ import PathHelper from '../../../helpers/PathHelper';
 
 // Storage
 import { Storage } from './Storage';
-import type { Folder, File, FileType } from './Storage';
+import type { Folder, File } from './Storage';
 
 // Components
 import Notepad from '../Notepad/Notepad';
