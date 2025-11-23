@@ -1,15 +1,29 @@
+import { useEffect, useState } from 'react';
 import ReactMarkDown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+// HELPERS
+import PathHelper from '../../../helpers/PathHelper';
+
+// Storage
+import { Storage } from '../Explorer/Storage';
+import type { File } from '../Explorer/Storage';
+
 // Interface Props
 interface Props {
-  content: string;
+  path: string;
 }
 
-function Notepad({ content }: Props) {
+function Notepad({ path }: Props) {
+  const [file, setFile] = useState<File>();
+
+  useEffect(() => {
+    const fileResult = PathHelper.getFile(path, Storage);
+    setFile(fileResult);
+  }, []);
   return (
     <div className="prose prose-slate text-slate-900 dark:text-slate-200 prose-headings:text-black prose-li:text-gray-300 p-4">
-      <ReactMarkDown remarkPlugins={[remarkGfm]}>{content}</ReactMarkDown>
+      <ReactMarkDown remarkPlugins={[remarkGfm]}>{file?.content}</ReactMarkDown>
     </div>
   );
 }

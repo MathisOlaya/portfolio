@@ -36,42 +36,17 @@ function Explorer(props: Props) {
     setPath(newPath);
 
     // update content
-    getFolderContent(newPath, Storage);
+    setCurrentFolderContent(PathHelper.getFolderContent(newPath, Storage));
   };
 
   const goToPath = (folderName: string) => {
     const newPath = path + '/' + folderName;
     setPath(newPath);
-    getFolderContent(newPath, Storage);
-  };
-
-  const getFolderContent = (pathDestination: string, root: Folder | File) => {
-    let storage = root;
-    let content: (Folder | File)[] = [];
-    // string to array of part
-    const arrayPath = PathHelper.splitPath(pathDestination);
-
-    for (let i = 0; i < arrayPath.length; i++) {
-      // for root (entry)
-      if (i === 0) {
-        if (storage.type !== 'folder') continue;
-        content = storage.children;
-        continue;
-      }
-
-      // get children based on name
-      const child = content.find((child) => child.name === arrayPath[i] && child.type === 'folder');
-
-      if (!child || child.type !== 'folder') continue;
-
-      // save children for next iteration
-      content = child.children;
-    }
-    setCurrentFolderContent(content);
+    setCurrentFolderContent(PathHelper.getFolderContent(newPath, Storage));
   };
 
   useEffect(() => {
-    getFolderContent(path, Storage);
+    setCurrentFolderContent(PathHelper.getFolderContent(path, Storage));
   }, []);
 
   return (
@@ -91,7 +66,7 @@ function Explorer(props: Props) {
             );
           if (child.type === 'file')
             return (
-              <button className="flex flex-col p-2 hover:bg-gray-800 gap-1 items-center w-24" key={child.name} onClick={() => openApp(child.name, '/file.png', <Notepad content={child.content} />)}>
+              <button className="flex flex-col p-2 hover:bg-gray-800 gap-1 items-center w-24" key={child.name} onClick={() => openApp(child.name, '/file.png', <Notepad path={path + '/' + child.name} />)}>
                 <img className="w-12" src="/file.png"></img>
                 <p className="text-sm">{child.name}</p>
               </button>
