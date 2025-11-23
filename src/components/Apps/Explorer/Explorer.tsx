@@ -8,10 +8,11 @@ import PathHelper from '../../../helpers/PathHelper';
 
 // Storage
 import { Storage } from './Storage';
-import type { Folder, File } from './Storage';
+import type { Folder, File, FileType } from './Storage';
 
 // Components
 import Notepad from '../Notepad/Notepad';
+import Photos from '../Photos/Photos';
 
 // Icons
 import { ArrowUp } from 'lucide-react';
@@ -45,6 +46,16 @@ function Explorer(props: Props) {
     setCurrentFolderContent(PathHelper.getFolderContent(newPath, Storage));
   };
 
+  const openFile = (file: File) => {
+    switch (file.fileType) {
+      case 'text':
+        openApp(`Notepad - ${file.name}`, '/file.png', <Notepad path={path + '/' + file.name} />);
+        break;
+      case 'image':
+        openApp(`Image - ${file.name}`, '/photo.png', <Photos path={file.content} />);
+    }
+  };
+
   useEffect(() => {
     setCurrentFolderContent(PathHelper.getFolderContent(path, Storage));
   }, []);
@@ -66,8 +77,8 @@ function Explorer(props: Props) {
             );
           if (child.type === 'file')
             return (
-              <button className="flex flex-col p-2 hover:bg-gray-800 gap-1 items-center w-24" key={child.name} onClick={() => openApp(child.name, '/file.png', <Notepad path={path + '/' + child.name} />)}>
-                <img className="w-12" src="/file.png"></img>
+              <button className="flex flex-col p-2 hover:bg-gray-800 gap-1 items-center w-24" key={child.name} onClick={() => openFile(child)}>
+                <img className="w-12" src={child.fileType === 'text' ? '/file.png' : '/photo.png'}></img>
                 <p className="text-sm">{child.name}</p>
               </button>
             );
