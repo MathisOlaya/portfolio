@@ -22,7 +22,7 @@ function Notepad({ path }: Props) {
     setFile(fileResult);
   }, []);
   return (
-    <div className="prose prose-slate text-slate-900 dark:text-slate-200 prose-headings:text-black prose-li:text-gray-300 p-4">
+    <div className="prose prose-slate text-slate-900 dark:text-slate-200 prose-headings:text-white prose-a:text-white prose-strong:text-white prose-li:text-gray-300 p-4">
       <ReactMarkDown remarkPlugins={[remarkGfm]}>{file?.content}</ReactMarkDown>
     </div>
   );
