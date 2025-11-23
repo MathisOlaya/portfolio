@@ -47,3 +47,4 @@
 - Correct icon in Explorer
 - Notepad that can render Markdown 
   
+<img width="1467" height="850" alt="image" src="https://github.com/user-attachments/assets/0480fab2-b75d-48fc-9e21-ce04a0981a5c" />
