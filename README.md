@@ -48,3 +48,13 @@
 - Notepad that can render Markdown 
   
 <img width="1467" height="850" alt="image" src="https://github.com/user-attachments/assets/0480fab2-b75d-48fc-9e21-ce04a0981a5c" />
+
+### 23.11.2025 — Update
+- Updated the color
+- Image Application
+- Added hour to TaskBar
+- Reponsive Grid for Icon
+- Refactored Notepad app (using path as props)
+
+
+<img width="1911" height="899" alt="image" src="https://github.com/user-attachments/assets/941b3d42-2c4f-4606-85fb-00fbaaca1f97" />
