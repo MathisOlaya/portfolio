@@ -23,10 +23,6 @@ export const AppManagerProvider = ({ children }: { children: ReactNode }) => {
   const [openApps, setOpenApps] = useState<AppInstance[]>([]);
 
   const openApp = (name: string, icon: string, content: ReactNode) => {
-    if (isValidElement(content) && content.type && (content.type as any).name === 'Notepad') {
-      name = `Notepad - ${name}`;
-    }
-
     setOpenApps((prev) => [
       ...prev,
       {
