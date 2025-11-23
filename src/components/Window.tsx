@@ -74,7 +74,7 @@ function Window({ id, icon, name, children, position }: Props) {
     absolute flex flex-col
     top-[var(--top)] left-[var(--left)] w-full -translate-x-1/2 -translate-y-1/2 aspect-[4/3] touch-none
     md:w-2/3 md:max-w-xl
-    bg-gray-700
+    bg-gray-900
   "
     >
       <div onTouchStart={handleDown} onTouchMove={handleMove} onTouchEnd={() => setMouseDownState(false)} onMouseDown={handleDown} onMouseMove={handleMove} onMouseUp={() => setMouseDownState(false)} className="flex bg-black justify-between">
